@@ -1,23 +1,31 @@
 function startCountdown(seconds: number) {
     let counter: number = seconds;
-        
+
     const interval = setInterval(() => {
         $('#timer').val(counter);
         counter--;
-        
-        if (counter < 0 ) {
+
+        if (counter < 0) {
             clearInterval(interval);
         }
     }, 1000);
 }
 
+function componentToHex(c: number) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r: number, g: number, b: number) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 $(() => {
-    $('#start').on('click', function(e) {
-        let randomColor: string = '#' + Math.floor(Math.random()*16777215).toString(16);
+    $('#start').on('click', function (e) {
+        let randomColor: string = '#' + Math.floor(Math.random() * 16777215).toString(16);
         $('#color-box').css('backgrouind-color', randomColor);
 
         // Grab name and time
-        var userName  = String($("#nameInput").val());
+        var userName = String($("#nameInput").val());
         var timeLimit = Number($("#timeInput").val());
         if (userName == '') {
             window.alert("Please enter a name");
