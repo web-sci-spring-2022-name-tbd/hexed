@@ -19,6 +19,7 @@ function componentToHex(c: number) {
 function rgbToHex(r: number, g: number, b: number) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
 $(() => {
     $('#start').on('click', function (e) {
         let randomColor: string = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -34,5 +35,17 @@ $(() => {
         }
 
         startCountdown(timeLimit);
+    });
+});
+
+$(() => {
+    $('#submit').on('click', function (e) {
+        // Grab name and time
+        var r_value = Number($("#r-input").val());
+        var g_value = Number($("#g-input").val());
+        var b_value = Number($("#b-input").val());
+        if (rgbToHex(r_value, g_value, b_value) == randomColor) {
+
+        }
     });
 });
