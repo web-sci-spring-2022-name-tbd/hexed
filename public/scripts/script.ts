@@ -36,15 +36,14 @@ $(() => {
         }
 
         startCountdown(timeLimit);
-    });
 
-    $('#submit').on('click', function (e) {
-        // Grab name and time
-        var r_value = Number($("#r-input").val());
-        var g_value = Number($("#g-input").val());
-        var b_value = Number($("#b-input").val());
-        if (rgbToHex(r_value, g_value, b_value) == randomColor) {
-
-        }
+        $('#submit').on('click', function (e) {
+            // Grab name and time
+            var r_value = Number($("#r-input").val());
+            var g_value = Number($("#g-input").val());
+            var b_value = Number($("#b-input").val());
+            var userCode = rgbToHex(r_value, g_value, b_value);
+            console.log("code: " + userCode);
+        });
     });
 });
