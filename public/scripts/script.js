@@ -1,4 +1,14 @@
 "use strict";
+// import $ from "jquery";
+function updateRed(val) {
+    $("#red_value").val(val);
+}
+function updateGreen(val) {
+    $("#green_value").val(val);
+}
+function updateBlue(val) {
+    $("#blue_value").val(val);
+}
 function startCountdown(seconds) {
     let counter = seconds;
     const interval = setInterval(() => {
@@ -39,5 +49,13 @@ $(() => {
             var userCode = rgbToHex(r_value, g_value, b_value);
             console.log("code: " + userCode);
         });
+    });
+    $('#submit').on('click', function (e) {
+        // Grab name and time
+        var r_value = Number($("#r-input").val());
+        var g_value = Number($("#g-input").val());
+        var b_value = Number($("#b-input").val());
+        if (rgbToHex(r_value, g_value, b_value) == randomColor) {
+        }
     });
 });
