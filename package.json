@@ -5,5 +5,23 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.5.13"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "hexed",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-sci-spring-2022-name-tbd/hexed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/web-sci-spring-2022-name-tbd/hexed/issues"
+  },
+  "homepage": "https://github.com/web-sci-spring-2022-name-tbd/hexed#readme",
+  "description": ""
 }

@@ -1,23 +1,33 @@
 function startCountdown(seconds: number) {
     let counter: number = seconds;
-        
+
     const interval = setInterval(() => {
         $('#timer').html(String(counter));
         counter--;
-        
-        if (counter < 0 ) {
+
+        if (counter < 0) {
             clearInterval(interval);
         }
     }, 1000);
 }
 
+function componentToHex(c: number) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r: number, g: number, b: number) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
 $(() => {
+    let randomColor: string;
     $('#start').on('click', function(e) {
-        let randomColor: string = '#' + Math.floor(Math.random()*16777215).toString(16);
+        randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
         $('#colorbox').css('background-color', randomColor);
 
         // Grab name and time
-        var userName  = String($("#nameInput").val());
+        var userName = String($("#nameInput").val());
         var timeLimit = Number($("#timeInput").val());
         if (userName == '') {
             window.alert("Please enter a name");
@@ -26,5 +36,15 @@ $(() => {
         }
 
         startCountdown(timeLimit);
+    });
+
+    $('#submit').on('click', function (e) {
+        // Grab name and time
+        var r_value = Number($("#r-input").val());
+        var g_value = Number($("#g-input").val());
+        var b_value = Number($("#b-input").val());
+        if (rgbToHex(r_value, g_value, b_value) == randomColor) {
+
+        }
     });
 });
