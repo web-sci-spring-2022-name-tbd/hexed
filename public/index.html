@@ -14,13 +14,16 @@
 
 <body>
   <div class="slide_red">
-    <p>Red:</p><input type="range" min="0" max="255" value="50" class="slider" id="red_v">
+    <p>Red:</p><input type="range" min="0" max="255" value="50" class="slider" id="red_v" oninput="updateRed(this.value)">
+  <div class="right"><input id="red_value" value="" disabled></div>
   </div>
   <div class="slide_green">
-    <p>Green:</p><input type="range" min="0" max="255" value="50" class="slider" id="green_v">
+    <p>Green:</p><input type="range" min="0" max="255" value="50" class="slider" id="green_v" oninput="updateGreen(this.value)">
+  <div class="right"><input id="green_value" value="" disabled></div>
   </div>
   <div class="slide_blue">
-    <p>Blue:</p><input type="range" min="0" max="255" value="50" class="slider" id="blue_v">
+    <p>Blue:</p><input type="range" min="0" max="255" value="50" class="slider" id="blue_v" oninput="updateBlue(this.value)">
+  <div class="right"><input id="blue_value" value="" disabled></div>
   </div>
   <div id="timer"></div>
   <input type="text" name="userName" placeholder="Name" id="nameInput">
