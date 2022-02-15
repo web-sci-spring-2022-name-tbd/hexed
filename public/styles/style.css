@@ -1,3 +1,11 @@
 .right {
     float:right;
+#colorbox {
+  width: 100px;
+  height: 100px;
+}
+
+#timer {
+  width: 100px;
+  height: 100px;
 }

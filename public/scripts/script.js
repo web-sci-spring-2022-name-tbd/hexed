@@ -12,7 +12,7 @@ function updateBlue(val) {
 function startCountdown(seconds) {
     let counter = seconds;
     const interval = setInterval(() => {
-        $('#timer').val(counter);
+        $('#timer').html(String(counter));
         counter--;
         if (counter < 0) {
             clearInterval(interval);
@@ -27,9 +27,10 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 $(() => {
+    let randomColor;
     $('#start').on('click', function (e) {
-        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-        $('#color-box').css('backgrouind-color', randomColor);
+        randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        $('#colorbox').css('background-color', randomColor);
         // Grab name and time
         var userName = String($("#nameInput").val());
         var timeLimit = Number($("#timeInput").val());
@@ -41,8 +42,6 @@ $(() => {
         }
         startCountdown(timeLimit);
     });
-});
-$(() => {
     $('#submit').on('click', function (e) {
         // Grab name and time
         var r_value = Number($("#r-input").val());
