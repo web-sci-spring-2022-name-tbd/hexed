@@ -1,11 +1,30 @@
+function startCountdown(seconds: number) {
+    let counter: number = seconds;
+        
+    const interval = setInterval(() => {
+        $('#timer').val(counter);
+        counter--;
+        
+        if (counter < 0 ) {
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
 $(() => {
     $('#start').on('click', function(e) {
-<<<<<<< HEAD
         let randomColor: string = '#' + Math.floor(Math.random()*16777215).toString(16);
         $('#color-box').css('backgrouind-color', randomColor);
-=======
-        
-        var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
->>>>>>> ebb0a4319f7d9fb987b03c10d03ec217416550a5
+
+        // Grab name and time
+        var userName  = String($("#nameInput").val());
+        var timeLimit = Number($("#timeInput").val());
+        if (userName == '') {
+            window.alert("Please enter a name");
+        } else if (timeLimit < 1 || timeLimit > 100) {
+            window.alert("Please enter a correct time");
+        }
+
+        startCountdown(timeLimit);
     });
 });
