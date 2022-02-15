@@ -2,7 +2,7 @@ function startCountdown(seconds: number) {
     let counter: number = seconds;
         
     const interval = setInterval(() => {
-        $('#timer').val(counter);
+        $('#timer').html(String(counter));
         counter--;
         
         if (counter < 0 ) {
@@ -14,7 +14,7 @@ function startCountdown(seconds: number) {
 $(() => {
     $('#start').on('click', function(e) {
         let randomColor: string = '#' + Math.floor(Math.random()*16777215).toString(16);
-        $('#color-box').css('backgrouind-color', randomColor);
+        $('#colorbox').css('background-color', randomColor);
 
         // Grab name and time
         var userName  = String($("#nameInput").val());
