@@ -46,7 +46,7 @@ $(() => {
 
         // Grab name and time
         var userName = String($("#nameInput").val());
-        var timeLimit = Number($("#timeInput").val());
+        var timeLimit = (Number($("#timeInput").val()) === 0 ? 60 : Number($("#timeInput").val()));
         if (userName == '') {
             window.alert("Please enter a name");
         } else if (timeLimit < 1 || timeLimit > 100) {
