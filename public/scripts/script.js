@@ -1,5 +1,8 @@
 "use strict";
 // import $ from "jquery";
+function updateValue(val, color) {
+    $(`#${color}-val`).val(val);
+}
 function updateRed(val) {
     $("#red_value").val(val);
 }

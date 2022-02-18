@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const PORT = 3000;
 
 app.use(express.static('public'));
 
@@ -10,5 +11,5 @@ app.get('/', function(req, res) {
 
 // start server
 app.listen(3000, function() {
-  console.log('Server up on *:3000');
+  console.log(`Server up on http://localhost:${PORT}`);
 });

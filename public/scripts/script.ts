@@ -1,5 +1,9 @@
 // import $ from "jquery";
 
+function updateValue(val: number, color: String) {
+    $(`#${color}-val`).val(val);
+}
+
 function updateRed(val: number) {
     $("#red_value").val(val);
 }
