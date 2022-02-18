@@ -3,15 +3,6 @@
 function updateValue(val, color) {
     $(`#${color}-val`).val(val);
 }
-function updateRed(val) {
-    $("#red_value").val(val);
-}
-function updateGreen(val) {
-    $("#green_value").val(val);
-}
-function updateBlue(val) {
-    $("#blue_value").val(val);
-}
 function startCountdown(seconds) {
     let counter = seconds;
     const interval = setInterval(() => {

@@ -4,18 +4,6 @@ function updateValue(val: number, color: String) {
     $(`#${color}-val`).val(val);
 }
 
-function updateRed(val: number) {
-    $("#red_value").val(val);
-}
-
-function updateGreen(val: number) {
-    $("#green_value").val(val);
-}
-
-function updateBlue(val: number) {
-    $("#blue_value").val(val);
-}
-
 function startCountdown(seconds: number) {
     let counter: number = seconds;
 
