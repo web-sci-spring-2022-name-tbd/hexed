@@ -30,8 +30,9 @@ function rgbToHex(r: number, g: number, b: number) {
 interface highScore {
     name: string;
     scoreNum: number;
+    time: string;
 }
-let temp: highScore;
+
 let scores: highScore[] = [];
 
 
@@ -72,22 +73,41 @@ $(() => {
 
             var score = ((255 - Math.abs(actual_red - r_value)) + (255 - Math.abs(actual_green - g_value)) + (255 - Math.abs(actual_blue - b_value)) * Math.floor(remaining_time) * (1000 * (101 - timeLimit)));
 
-            var userName = String($("#nameInput").val());
-            
+            userName = String($("#nameInput").val());
             let scoreArray: highScore = {
                 name: userName,
-                scoreNum: score
+                scoreNum: score,
+                time: String(Date.now()).slice(0, -1)
             };
-            temp = scoreArray;
-            console.log(scoreArray)
+            // console.log(scoreArray)
 
-            scores.push(scoreArray);
+            scores.push(scoreArray);   
             $("#submit").prop("disabled",true);     // band aid fix to stop the user from submitting multiple scores
         });
     });
 });
 
+
+
+
 function updateScores() {
+
+    // obj.arr = obj.arr.filter((value, index, self) =>
+    //     index === self.findIndex((t) => (
+    //         t.place === value.place && t.name === value.name
+    //     ))
+    // )
+
+    // scores = scores.filter((value, index, self) => 
+    //     index === self.findIndex((t) => (
+    //         t.scoreNum === value.scoreNum && t.name === value.name
+    //     ))
+    // )
+
+    // arr.filter((v,i,a)=>a.findIndex(t=>(JSON.stringify(t) === JSON.stringify(v)))===i)
+
+    scores = scores.filter((v, i, a) => a.findIndex(t=>(JSON.stringify(t) === JSON.stringify(v)))===i)
+
     scores.sort((a: highScore, b: highScore) => {
         return (a["scoreNum"] > b["scoreNum"] ? 1 : -1);
     })
