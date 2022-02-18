@@ -1,5 +1,6 @@
 // import $ from "jquery";
 
+
 function updateValue(val: number, color: String) {
     $(`#${color}-val`).val(val);
 }
@@ -44,12 +45,35 @@ $(() => {
         startCountdown(timeLimit);
 
         $('#submit').on('click', function (e) {
+            
             // Grab name and time
             var r_value = Number($("#r-input").val());
             var g_value = Number($("#g-input").val());
             var b_value = Number($("#b-input").val());
             var userCode = rgbToHex(r_value, g_value, b_value);
+            
+            //calculates actual RGB colors
+            var actual_red = parseInt(randomColor[1]+randomColor[2],16);
+            var actual_green = parseInt(randomColor[3]+randomColor[4],16);
+            var actual_blue = parseInt(randomColor[5]+randomColor[6],16);
+
+            var remaining_time = Number($("#timer").text());
+
+
             console.log("code: " + userCode);
+            console.log("r_value inputted: " + r_value);
+            console.log("g_value inputted: " + g_value);
+            console.log("b_value inputted: " + b_value);
+            console.log("randomeColor: " + randomColor);
+            console.log("actual_red inputted: " + actual_red);
+            console.log("actual_green inputted: " + actual_green);
+            console.log("actual_blue inputted: " + actual_blue);
+            console.log("remaining_time left: " + remaining_time);
+            console.log("time limit inputted: " + timeLimit);
+
+            var score = ((255 - Math.abs(actual_red - r_value)) + (255 - Math.abs(actual_green - g_value)) + (255 - Math.abs(actual_blue - b_value)) * Math.floor(remaining_time) * (1000 * (101 - timeLimit)));
+            console.log("score: " + score);
+
         });
     });
 });
