@@ -82,6 +82,7 @@ $(() => {
             // console.log(scoreArray)
 
             scores.push(scoreArray);   
+            updateScores();
             $("#submit").prop("disabled",true);     // band aid fix to stop the user from submitting multiple scores
         });
     });
@@ -92,23 +93,28 @@ $(() => {
 
 function updateScores() {
 
-    // obj.arr = obj.arr.filter((value, index, self) =>
-    //     index === self.findIndex((t) => (
-    //         t.place === value.place && t.name === value.name
-    //     ))
-    // )
+    // arr.filter((v,i,a)=>a.findIndex(t=>(t.label === v.label && t.value===v.value))===i)
 
-    // scores = scores.filter((value, index, self) => 
-    //     index === self.findIndex((t) => (
-    //         t.scoreNum === value.scoreNum && t.name === value.name
-    //     ))
-    // )
+    scores = scores.filter((v, i, a) => a.findIndex(t=>(t.time === v.time))===i);
 
-    // arr.filter((v,i,a)=>a.findIndex(t=>(JSON.stringify(t) === JSON.stringify(v)))===i)
-
-    scores = scores.filter((v, i, a) => a.findIndex(t=>(JSON.stringify(t) === JSON.stringify(v)))===i)
+    // scores = scores.filter((v, i, a) => a.findIndex(t=>(JSON.stringify(t) === JSON.stringify(v)))===i)
 
     scores.sort((a: highScore, b: highScore) => {
-        return (a["scoreNum"] > b["scoreNum"] ? 1 : -1);
+        return (a["scoreNum"] > b["scoreNum"] ? -1 : 1);
     })
+
+    $("#high-scores").empty();
+
+    let out: string = "<tr>";
+    out += "<th>User Name</th>";
+    out += "<th>User High Score</th>";
+    out += "</tr>";
+    for (let i: number = 0; i < (scores.length >= 10 ? 10 : scores.length); i++) {
+        out += "<tr>";
+            out += `<td>${scores[i].name}</td>`;
+            out += `<td>${scores[i].scoreNum}</td>`;
+        out += "</tr>";
+    }
+
+    $("#high-scores").html(out);
 }
