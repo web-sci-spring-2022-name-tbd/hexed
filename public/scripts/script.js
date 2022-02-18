@@ -1,5 +1,4 @@
 "use strict";
-// import $ from "jquery";
 function updateValue(val, color) {
     $(`#${color}-val`).val(val);
 }
@@ -10,6 +9,8 @@ function startCountdown(seconds) {
         counter--;
         if (counter < 0) {
             clearInterval(interval);
+            $("#submit").prop("disabled", false);
+            $("#start").prop("disabled", false);
         }
     }, 1000);
 }
@@ -20,20 +21,25 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+let temp;
+let scores = [];
 $(() => {
     let randomColor;
     $('#start').on('click', function (e) {
+        $("#start").prop("disabled", true);
         randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
         $('#colorbox').css('background-color', randomColor);
         // Grab name and time
         var userName = String($("#nameInput").val());
-        var timeLimit = (Number($("#timeInput").val()) === 0 ? 60 : Number($("#timeInput").val()));
+        var timeLimit = (Number($("#timeInput").val()) === 0 ? 59 : Number($("#timeInput").val()) - 1);
+        $("#timer").html(String(timeLimit === 59 ? 60 : timeLimit + 1));
         if (userName == '') {
             window.alert("Please enter a name");
         }
-        else if (timeLimit < 1 || timeLimit > 100) {
+        else if (timeLimit < 0 || timeLimit > 101) {
             window.alert("Please enter a correct time");
         }
+        $("#submit").prop("disabled", false);
         startCountdown(timeLimit);
         $('#submit').on('click', function (e) {
             // Grab name and time
@@ -46,18 +52,21 @@ $(() => {
             var actual_green = parseInt(randomColor[3] + randomColor[4], 16);
             var actual_blue = parseInt(randomColor[5] + randomColor[6], 16);
             var remaining_time = Number($("#timer").text());
-            console.log("code: " + userCode);
-            console.log("r_value inputted: " + r_value);
-            console.log("g_value inputted: " + g_value);
-            console.log("b_value inputted: " + b_value);
-            console.log("randomeColor: " + randomColor);
-            console.log("actual_red inputted: " + actual_red);
-            console.log("actual_green inputted: " + actual_green);
-            console.log("actual_blue inputted: " + actual_blue);
-            console.log("remaining_time left: " + remaining_time);
-            console.log("time limit inputted: " + timeLimit);
             var score = ((255 - Math.abs(actual_red - r_value)) + (255 - Math.abs(actual_green - g_value)) + (255 - Math.abs(actual_blue - b_value)) * Math.floor(remaining_time) * (1000 * (101 - timeLimit)));
-            console.log("score: " + score);
+            var userName = String($("#nameInput").val());
+            let scoreArray = {
+                name: userName,
+                scoreNum: score
+            };
+            temp = scoreArray;
+            console.log(scoreArray);
+            scores.push(scoreArray);
+            $("#submit").prop("disabled", true); // band aid fix to stop the user from submitting multiple scores
         });
     });
 });
+function updateScores() {
+    scores.sort((a, b) => {
+        return (a["scoreNum"] > b["scoreNum"] ? 1 : -1);
+    });
+}
